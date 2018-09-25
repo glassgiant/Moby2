@@ -1,4 +1,5 @@
 import pygame
+import math
 
 class Eye(object):
     def __init__(self, side, diameter, (x, y)):
@@ -19,8 +20,8 @@ class Eye(object):
         self.desty = y
     
     def draw(self, screen):
-        pygame.draw.circle(screen, self.color, (self.x,self.y), self.diameter/2, 0)
-        pygame.draw.circle(screen, self.p_color, (self.p_x,self.p_y), self.p_diameter/2, 0)
+        pygame.draw.circle(screen, self.color, (self.x,self.y), int(self.diameter/2), 0)
+        pygame.draw.circle(screen, self.p_color, (self.p_x,self.p_y), int(self.p_diameter/2), 0)
         
     def moveTo(self,x,y,speed=0):
         self.destx = self.x + x
@@ -28,17 +29,13 @@ class Eye(object):
         if (speed != 0):
             self.speed = speed
         
-    def updatePupil(self):
+    def updatePupil(self, speed):
         dx = self.destx - self.p_x;
-        if (dx < -self.speed):
-            dx = -self.speed
-        elif (dx > self.speed):
-            dx = self.speed
         dy = self.desty - self.p_y;
-        if (dy < -self.speed):
-            dy = -self.speed
-        elif (dy > self.speed):
-            dy = self.speed
+        if (dx**2+dy**2 > speed**2): #
+            scalefactor = math.sqrt(speed**2)/math.sqrt(dx**2+dy**2)
+            dx = int(round(dx*scalefactor))
+            dy = int(round(dy*scalefactor))
         self.p_x += dx    
         self.p_y += dy    
 
