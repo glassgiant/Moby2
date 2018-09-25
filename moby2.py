@@ -15,6 +15,7 @@ screen.fill(bgcolor)
 done = False
 speed = 10
 statusmessage = ''
+pygame.mixer.init()
 displaymode = 'face'
 
 eyedirs = {pygame.K_q:[-85,-85],pygame.K_w:[0,-120],pygame.K_e:[85,-85],pygame.K_a:[-120,0],pygame.K_s:[0,0],pygame.K_d:[120,0],pygame.K_z:[-85,85],pygame.K_x:[0,120],pygame.K_c:[85,85]}
@@ -39,15 +40,19 @@ while not done:
                 done = True 
             elif event.key in eyedirs:
                 moveEyes(eyedirs[event.key][0],eyedirs[event.key][1],speed)
+            elif event.key == pygame.K_i:
+                displaymode = 'face'
+                screen.fill(bgcolor)
+            elif event.key == pygame.K_o:
+                displaymode = 'image'
+                img = pygame.image.load('images/garbage.jpg')
+                screen.blit(img,(0,0))
+                pygame.display.flip()
             elif event.key == pygame.K_p:
-                if displaymode == 'image':
-                    displaymode = 'face'
-                    screen.fill(bgcolor)
-                else:
-                    displaymode = 'image'
-                    img = pygame.image.load('images/garbage.jpg')
-                    screen.blit(img,(0,0))
-                    pygame.display.flip()
+                displaymode = 'audio'
+                pygame.mixer.music.load('audio/3rs.mp3')
+                pygame.mixer.music.play()
+                pygame.mixer.music.play()
 
     if (statusmessage):
         status = myfont.render(statusmessage,False,(255,0,0))
