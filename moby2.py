@@ -10,7 +10,7 @@ pygame.init()
 screen = pygame.display.set_mode((1024, 600))
 done = False
 bgcolor = (0,0,0);
-speed = 5
+speed = 10
 
 eyedirs = {pygame.K_q:[-85,-85],pygame.K_w:[0,-120],pygame.K_e:[85,-85],pygame.K_a:[-120,0],pygame.K_s:[0,0],pygame.K_d:[120,0],pygame.K_z:[-85,85],pygame.K_x:[0,120],pygame.K_c:[85,85]}
 
