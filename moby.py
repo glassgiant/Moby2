@@ -19,15 +19,13 @@ class Eye(object):
         self.desty = y
     
     def draw(self, screen):
-        screen.fill(self.bgcolor)
         pygame.draw.circle(screen, self.color, (self.x,self.y), self.diameter/2, 0)
         pygame.draw.circle(screen, self.p_color, (self.p_x,self.p_y), self.p_diameter/2, 0)
-        pygame.display.flip()
         
     def moveTo(self,x,y,speed=0):
         self.destx = self.x + x
         self.desty = self.y + y
-        if (speed != 0)
+        if (speed != 0):
             self.speed = speed
         
     def updatePupil(self):
