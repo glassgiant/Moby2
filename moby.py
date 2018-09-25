@@ -10,8 +10,8 @@ class Eye(object):
         self.bgcolor = (0,0,0)
         self.color = (255,255,255)
         #pupil
-        self.p_color = (127,127,127)
-        self.p_diameter = 10
+        self.p_color = (255,0,0)
+        self.p_diameter = 50
         self.p_x = x
         self.p_y = y
         self.p_state = 0 #0=still 1=moving

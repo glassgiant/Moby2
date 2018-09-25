@@ -15,6 +15,7 @@ screen.fill(bgcolor)
 done = False
 speed = 10
 statusmessage = ''
+displaymode = 'face'
 
 eyedirs = {pygame.K_q:[-85,-85],pygame.K_w:[0,-120],pygame.K_e:[85,-85],pygame.K_a:[-120,0],pygame.K_s:[0,0],pygame.K_d:[120,0],pygame.K_z:[-85,85],pygame.K_x:[0,120],pygame.K_c:[85,85]}
 
@@ -38,17 +39,27 @@ while not done:
                 done = True 
             elif event.key in eyedirs:
                 moveEyes(eyedirs[event.key][0],eyedirs[event.key][1],speed)
+            elif event.key == pygame.K_p:
+                if displaymode == 'image':
+                    displaymode = 'face'
+                    screen.fill(bgcolor)
+                else:
+                    displaymode = 'image'
+                    img = pygame.image.load('images/garbage.jpg')
+                    screen.blit(img,(0,0))
+                    pygame.display.flip()
 
     if (statusmessage):
         status = myfont.render(statusmessage,False,(255,0,0))
         screen.blit(status, (10,10))
-        
-    l_eye.updatePupil(speed)
-    r_eye.updatePupil(speed) 
-    l_eye.draw(screen)
-    r_eye.draw(screen)
-    pygame.display.flip()    
-    time.sleep(.03)
+
+    if displaymode == 'face':   
+        l_eye.updatePupil(speed)
+        r_eye.updatePupil(speed) 
+        l_eye.draw(screen)
+        r_eye.draw(screen)
+        pygame.display.flip() #this will have to be refactored later to optimize for a Pi   
+    time.sleep(.04)
     
 
     
